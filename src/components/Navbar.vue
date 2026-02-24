@@ -1,25 +1,25 @@
 <template>
   <nav class="navbar">
     <!-- LOGO -->
-    <div class="logo">
+    <router-link to="/" class="logo">
       <img src="@/assets/logo.png" alt="CJS Logo" class="logo-img" />
       <div class="logo-text">
         <strong>CJS</strong>
         <span>Consortium Jeunesse Sénégal</span>
       </div>
-    </div>
+    </router-link>
 
     <!-- MENU DESKTOP -->
     <ul class="links">
-      <li>Fonctionnalités</li>
-      <li>À propos</li>
-      <li>Contact</li>
+      <li><router-link to="/fonctionnalites">Fonctionnalités</router-link></li>
+      <li><router-link to="/about">À propos</router-link></li>
+      <li><router-link to="/contact">Contact</router-link></li>
     </ul>
 
     <!-- BOUTONS DESKTOP -->
     <div class="auth-buttons">
-      <button class="btn-outline">Connexion</button>
-      <button class="btn-primary">Inscription</button>
+      <router-link to="/login" class="btn-outline">Connexion</router-link>
+      <router-link to="/register" class="btn-primary">Inscription</router-link>
     </div>
 
     <!-- HAMBURGER MOBILE -->
@@ -30,14 +30,14 @@
     <!-- MENU MOBILE -->
     <div v-if="menuOpen" class="mobile-menu">
       <ul>
-        <li>Fonctionnalités</li>
-        <li>À propos</li>
-        <li>Contact</li>
+        <li><router-link to="/fonctionnalites" @click="toggleMenu">Fonctionnalités</router-link></li>
+        <li><router-link to="/about" @click="toggleMenu">À propos</router-link></li>
+        <li><router-link to="/contact" @click="toggleMenu">Contact</router-link></li>
       </ul>
 
       <div class="mobile-buttons">
-        <button class="btn-outline">Connexion</button>
-        <button class="btn-primary">Inscription</button>
+        <router-link to="/login" class="btn-outline" @click="toggleMenu">Connexion</router-link>
+        <router-link to="/register" class="btn-primary" @click="toggleMenu">Inscription</router-link>
       </div>
     </div>
   </nav>
@@ -54,7 +54,6 @@ const toggleMenu = () => {
 </script>
 
 <style scoped>
-/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -68,6 +67,8 @@ const toggleMenu = () => {
 .logo {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .logo-img {
@@ -89,8 +90,17 @@ const toggleMenu = () => {
   display: flex;
   gap: 25px;
   list-style: none;
+}
+
+.links a {
+  text-decoration: none;
   color: gray;
   font-size: 18px;
+}
+
+.links a.router-link-active {
+  color: #1e3a8a;
+  font-weight: bold;
 }
 
 /* BUTTONS */
@@ -104,8 +114,7 @@ const toggleMenu = () => {
   color: white;
   padding: 8px 15px;
   border-radius: 5px;
-  border: none;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-outline {
@@ -113,7 +122,8 @@ const toggleMenu = () => {
   padding: 8px 15px;
   border-radius: 5px;
   background: transparent;
-  cursor: pointer;
+  text-decoration: none;
+  color: #1e3a8a;
 }
 
 /* HAMBURGER */
@@ -124,14 +134,11 @@ const toggleMenu = () => {
   margin-left: auto;
 }
 
-/* MOBILE MENU */
+/* MOBILE */
 .mobile-menu {
   display: none;
 }
 
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
 @media (max-width: 768px) {
 
   .links,
@@ -165,6 +172,11 @@ const toggleMenu = () => {
     border-bottom: 1px solid #eee;
   }
 
+  .mobile-menu a {
+    text-decoration: none;
+    color: gray;
+  }
+
   .mobile-buttons {
     display: flex;
     flex-direction: column;
@@ -172,8 +184,9 @@ const toggleMenu = () => {
     margin-top: 15px;
   }
 
-  .mobile-buttons button {
+  .mobile-buttons a {
     width: 100%;
+    text-align: center;
   }
 }
 </style>
